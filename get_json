@@ -1,0 +1,27 @@
+import urllib.request
+import json
+import csv
+# url = "http://api.worldbank.org/v2/datacatalog?format=json"
+# request = urllib.request.Request(url)
+# response = urllib.request.urlopen(request)
+# data_content = response.read()
+# print(data_content)
+
+inputfile = open("E:\datacatalog.json","r")
+outputfile = open("E:\catalog.csv", "w")
+
+
+js = json.load(inputfile)
+
+# js = json.loads(data_content)
+
+catalog = js["datacatalog"]
+
+for i in catalog:
+    print(i['id'])
+    for n in i["metatype"]:
+        row = i['id']+","+str(n['id']) + "," + str(n['value'])+"\n"
+        outputfile.write(row)
+
+
+
